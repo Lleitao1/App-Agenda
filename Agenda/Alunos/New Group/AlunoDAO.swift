@@ -11,13 +11,13 @@ import CoreData
 
 class AlunoDAO: NSObject {
     
-     var gerenciadorDeResultados:NSFetchedResultsController<Aluno>?
+    var gerenciadorDeResultados:NSFetchedResultsController<Aluno>?
     var contexto:NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
     
-    func recuperaAluno() -> Array<Aluno> {
+    func recuperaAlunos() -> Array<Aluno> {
         let pesquisaAluno:NSFetchRequest<Aluno> = Aluno.fetchRequest()
         let ordenaPorNome = NSSortDescriptor(key: "nome", ascending: true)
         pesquisaAluno.sortDescriptors = [ordenaPorNome]
