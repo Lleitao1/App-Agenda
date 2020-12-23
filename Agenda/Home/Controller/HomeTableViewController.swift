@@ -132,6 +132,8 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate {
             AutenticacaoLocal().autorizaUsuario(completion: { (autenticado) in
                 if autenticado {
                     DispatchQueue.main.async {
+                        let alunoSelecionado = self.alunos[indexPath.row]
+                        Repositorio().deletaAluno(aluno: alunoSelecionado)
 //                        guard let alunoSelecionado = self.gerenciadorDeResultados?.fetchedObjects![indexPath.row] else { return }
 //                        self.contexto.delete(alunoSelecionado)
 //
