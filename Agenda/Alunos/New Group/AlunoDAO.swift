@@ -22,8 +22,6 @@ class AlunoDAO: NSObject {
         aluno.endereco = dicionarioDeAluno["endereco"] as? String
         aluno.telefone = dicionarioDeAluno["telefone"] as? String
         aluno.site = dicionarioDeAluno["site"] as? String
-        aluno.nota = (dicionarioDeAluno["nota"] as! NSString).doubleValue
-        atualizaContexto()
         
         guard let nota = dicionarioDeAluno["nota"] else {return}
         
@@ -32,8 +30,8 @@ class AlunoDAO: NSObject {
         else{
             let conversaoNota = String(describing: nota)
             aluno.nota = (conversaoNota as NSString).doubleValue
-            
         }
+        atualizaContexto()
     }
     func atualizaContexto(){
         
