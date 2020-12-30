@@ -15,18 +15,25 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate {
     let searchController = UISearchController(searchResultsController: nil)
     var alunoViewController:AlunoViewController?
     var alunos: Array<Aluno>  = []
+    lazy var pullToRefresh: UIRefreshControl = {
+        let pullToRefresh = UIRefreshControl()
+        pullToRefresh.addTarget(self, action: #selector (recarregaAlunos(_:)), for: UIControlEvents.valueChanged)
+        
+        return pullToRefresh
+    }()
     
     // MARK: - View Lifecycle
 
-    override func viewDidLoad() {
+        func viewDidLoad() {
         super.viewDidLoad()
         self.configuraSearch()
+            tableView.addSubview(pullToRefresh)
         NotificationCenter.default.addObserver(self, selector: #selector (atualizaAlunos
             ), name: NSNotification.Name?(rawValue: "atualizaAlunos"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        recuperaAlunos()
+        recuperaTodosAlunos()
     }
     
     // MARK: - Métodos
@@ -38,10 +45,30 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     @objc func atualizaAlunos() {
-        recuperaAlunos()
+        recuperaTodosAlunos()
     }
     
-    func recuperaAlunos(){
+    func recuperaUltimosAlunos(){
+        Repositorio().recuperaUltimosAlunos(versao {
+            self.alunos = AlunoDAO().recuperaAlunos()
+            self.tableView.reloadData()
+        })
+    }
+    
+    @objc func recarregaAlunos(_ refreshControl: UIRefreshControl){
+        let ultimaVersao = AlunoUserDefaults().recuperaUltimaVersao()
+        if ultimaVersao == nil{
+           recuperaTodosAlunos()
+        }else{
+            guard let versao = ultimaVersao else{return}
+            recuperaUltimosAlunos(versao)
+            
+        }
+        
+        refreshControl.endRefreshing()
+    }
+    
+    func recuperaTodosAlunos(){
         Repositorio().recuperaAlunos{(listaDeAlunos) in
             self.alunos = listaDeAlunos
             self.tableView.reloadData()

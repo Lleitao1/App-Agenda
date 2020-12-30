@@ -11,19 +11,21 @@ import Alamofire
 
 class AlunoAPI: NSObject {
     
+    lazy var url: String{
+       guard let url = Configuracao().getUrlPadrao() else {return ""}
+        
+       return url
+    }
+    
+    
     // MARK: - GET
     func recuperaAlunos(completion: @escaping() -> Void) {
-        guard let url = Configuracao().getUrlPadrao() else {return}
         
         Alamofire.request(url + "/api/aluno", method: .get).responseJSON{ (response) in switch response.result {
         case .success:
             print (response.result.value!)
-            if let resposta = response.result.value as? Dictionary<String, Any>
-            {
-                guard let listaDeAlunos = resposta["alunos"] as? Array<Dictionary<String,Any>> else{return}
-
-                for dicionarioDeAluno in listaDeAlunos {
-                    AlunoDAO().salvaAluno(dicionarioDeAluno: dicionarioDeAluno)}
+            if let resposta = response.result.value as? Dictionary<String, Any>{
+                self.serializaAlunos(resposta)
                 completion()
             }
             break
@@ -34,6 +36,23 @@ class AlunoAPI: NSObject {
             }
             
         }
+    }
+    
+    func recuperaUltimosAlunos(_ versao: String, completion: @escaping() -> Void){
+        Alamofire.request(url + "api/aluno/diff", method: .get, headers: ["datahora": versao]).responseJSON{
+            (response) in
+            switch response.result{
+            case .success :
+                if let resposta = response.result.value as? Dictionary<String, Any>{
+                    self.serializaAlunos(resposta)
+                }
+                completion()
+                break
+            case .failure:
+                break
+            }
+        }
+        
     }
     
     // MARK: - PUT
@@ -54,7 +73,6 @@ class AlunoAPI: NSObject {
     //MARK: - DELETE
     
     func deletaAluno(id: String) {
-        guard let url = Configuracao().getUrlPadrao() else {return}
         
         Alamofire.request(url + "/api/aluno/\(id)", method: .delete).responseJSON { (resposta) in
             switch resposta.result{
@@ -66,5 +84,23 @@ class AlunoAPI: NSObject {
             }
         }
     }
-
+    //MARK: - Serializacao
+    func serializaAlunos(_ resposta: Dictionary<String, Any>){
+        guard let listaDeAlunos = resposta["alunos"] as? Array<Dictionary<String,Any>> else{return}
+        
+        for dicionarioDeAluno in listaDeAlunos {
+            guard let status = dicionarioDeAluno["desativado"] as? Bool else{return}
+            
+            if status {
+                guard let idDoALuno = dicionarioDeAluno["id"] as? String else{return}
+                guard let UUIDAluno = UUID(uuidString: idDoALuno) else{return}
+                if let aluno = AlunoDAO().recuperaAlunos().filter({ $0.id == UUIDAluno}).first{
+                    AlunoDAO().DeletaAluno(aluno: aluno)
+                }
+            }else{
+                AlunoDAO.salvaAluno(dicionarioDeAluno: dicionarioDeAluno)
+            }
+        AlunoUserDefaults().salvaVersao(resposta)
+        }
+    }
 }

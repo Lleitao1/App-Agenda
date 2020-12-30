@@ -53,4 +53,10 @@ class Repositorio: NSObject {
         }
         AlunoAPI().salvaAlunosNoServidor(parametros: listaDeParametros)
     }
+    
+    func recuperaUltimosAlunos(_ versao: String, completion: @escaping() -> Void) {
+        AlunoAPI().recuperaUltimosAlunos(versao) {
+            completion()
+        }
+    }
 }

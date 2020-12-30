@@ -32,7 +32,15 @@ class Firebase: NSObject {
         }
         func sincronizaAlunos(alunos: Array<[String:Any]>)
         for aluno in alunos{
-            AlunoDAO.salvaAluno(dicionarioDeAluno: aluno)
+            guard let status = aluno["desativado"] as? Int else {return}
+            if status == StatusDoAluno.ativo.rawValue{
+                AlunoDAO.salvaAluno(dicionarioDeAluno: aluno)
+            }else{
+                guard let idDoAluno = aluno["id"] as? String else{return}
+                guard let aluno = AlunoDAO().recuperaAlunos().filter({$0.id == UUID(uuidString: idDoAluno)}).first else{return}
+                AlunoDAO().DeletaAluno(aluno: aluno)
+            }
+            
         }
     }
     
