@@ -19,6 +19,8 @@
 		3ADDBC3C2594AA62009F3767 /* LigacaoTelefonica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADDBC3B2594AA62009F3767 /* LigacaoTelefonica.swift */; };
 		3ADDBC422594B5EB009F3767 /* WebSafari.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADDBC412594B5EB009F3767 /* WebSafari.swift */; };
 		3ADDBC442594B7A4009F3767 /* Filtro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADDBC432594B7A4009F3767 /* Filtro.swift */; };
+		3AED228F259CFA0A00ADF479 /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AED228E259CFA0A00ADF479 /* Firebase.swift */; };
+		3AED2291259D015C00ADF479 /* Configuracao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AED2290259D015C00ADF479 /* Configuracao.swift */; };
 		3AF454EA25927C370061F26C /* AlunoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF454E925927C370061F26C /* AlunoAPI.swift */; };
 		3AF454F02592953D0061F26C /* Repositorio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF454EF2592953D0061F26C /* Repositorio.swift */; };
 		3AF454F2259296310061F26C /* AlunoDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF454F1259296310061F26C /* AlunoDAO.swift */; };
@@ -49,6 +51,8 @@
 		3ADDBC3B2594AA62009F3767 /* LigacaoTelefonica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigacaoTelefonica.swift; sourceTree = "<group>"; };
 		3ADDBC412594B5EB009F3767 /* WebSafari.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSafari.swift; sourceTree = "<group>"; };
 		3ADDBC432594B7A4009F3767 /* Filtro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filtro.swift; sourceTree = "<group>"; };
+		3AED228E259CFA0A00ADF479 /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
+		3AED2290259D015C00ADF479 /* Configuracao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuracao.swift; sourceTree = "<group>"; };
 		3AF454E925927C370061F26C /* AlunoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlunoAPI.swift; sourceTree = "<group>"; };
 		3AF454EF2592953D0061F26C /* Repositorio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repositorio.swift; sourceTree = "<group>"; };
 		3AF454F1259296310061F26C /* AlunoDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlunoDAO.swift; sourceTree = "<group>"; };
@@ -103,7 +107,7 @@
 				03AA17621FC8433E003CB2B8 /* Home */,
 				03AA17691FC84A2D003CB2B8 /* Alunos */,
 				B9FFD44E1FDEE6D300CEE593 /* Mapa */,
-				A28100181FD5C2E300E1BDF1 /* Componentes */,
+				3AED228C259CF9DF00ADF479 /* Firebase */,
 				65F277D320068C1900A8F1BF /* Assets */,
 				03AA17511FC84154003CB2B8 /* Main.storyboard */,
 				03AA17571FC84154003CB2B8 /* Assets.xcassets */,
@@ -155,6 +159,23 @@
 				03AA176C1FC8515A003CB2B8 /* AlunoViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		3AED228C259CF9DF00ADF479 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				3AED228D259CF9EB00ADF479 /* Model */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		3AED228D259CF9EB00ADF479 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3AED228E259CFA0A00ADF479 /* Firebase.swift */,
+				A28100181FD5C2E300E1BDF1 /* Componentes */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		3AF454E825927C210061F26C /* Model */ = {
@@ -213,6 +234,7 @@
 				3ADDBC3B2594AA62009F3767 /* LigacaoTelefonica.swift */,
 				3ADDBC412594B5EB009F3767 /* WebSafari.swift */,
 				3ADDBC432594B7A4009F3767 /* Filtro.swift */,
+				3AED2290259D015C00ADF479 /* Configuracao.swift */,
 			);
 			path = Componentes;
 			sourceTree = "<group>";
@@ -376,6 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AED228F259CFA0A00ADF479 /* Firebase.swift in Sources */,
 				3ADDBC422594B5EB009F3767 /* WebSafari.swift in Sources */,
 				03AA176D1FC8515A003CB2B8 /* AlunoViewController.swift in Sources */,
 				3AF454EA25927C370061F26C /* AlunoAPI.swift in Sources */,
@@ -389,6 +412,7 @@
 				03AA17681FC843B1003CB2B8 /* HomeTableViewCell.swift in Sources */,
 				B9518EFC1FD9BCEB00EBAFA5 /* MenuOpcoesAlunos.swift in Sources */,
 				B939B9B81FDAC2630084A557 /* Mensagem.swift in Sources */,
+				3AED2291259D015C00ADF479 /* Configuracao.swift in Sources */,
 				B9D565A71FE14ECA00BDA536 /* Notificacoes.swift in Sources */,
 				3ADDBC3C2594AA62009F3767 /* LigacaoTelefonica.swift in Sources */,
 				3AF454F02592953D0061F26C /* Repositorio.swift in Sources */,
