@@ -8,5 +8,7 @@ target 'Agenda' do
   pod 'Alamofire', '~> 4.7.0'
   
   pod 'AlamofireImage', '~> 3.4.0'
+  
+  pod 'Firebase/core'
 
 end
